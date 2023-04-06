@@ -42,7 +42,9 @@ const moveElemento = (el,veloc, inc)=> {
 
 
 //Função para clicar no elemento - matar o elemento
-
+const clickBug = (el)=>{
+      alert('Morri !!')
+}
 
 /*
 ----------------------------------------------------------------------------
@@ -76,14 +78,17 @@ for (const inv of invasores) {
     let incInicio   = Math.floor(Math.random()*10 + 5)
     posicElemento(inv)
     moveElemento(inv, velocInicio, incInicio)
+    inv.addEventListener('click', ()=>{ clickBug(inv) })
     
 }
 
+//Comportamento de TODOS os bonzinhos
 for (const bom of bonzinhos) {
     let velocInicio = Math.floor(Math.random()*20 + 5)
     let incInicio   = Math.floor(Math.random()*10 + 5)
     posicElemento(bom)
     moveElemento(bom, velocInicio, incInicio)
+    bom.addEventListener('click', ()=>{ clickBug(bom) })
     
     
 }
