@@ -33,6 +33,27 @@
             color: #600;
             font-weight: bold;
             font-size: 30px;
+            user-select: none;
+        }
+        #pts100 {
+            display: block;
+            width: 50px;
+            position: absolute;
+            left: -300px;
+            top: 300px;
+        }
+
+        #splash{
+            position: absolute;
+            left: -1000px;
+            top: 0;
+            /* desabilita ao clique */
+            pointer-events: none;
+        }
+        #contagem{
+            padding: 0 20px;
+            user-select: none;
+            font-weight: bold;
         }
 
         .invasor,
@@ -49,13 +70,7 @@
             background-color: crimson;
         }
 
-        #pts100 {
-            display: block;
-            width: 50px;
-            position: absolute;
-            left: -300px;
-            top: 300px;
-        }
+  
     </style>
 
 </head>
@@ -67,13 +82,14 @@
             <div id="contagem"><span id="infoTR" class="fw-bold"></span>
                 segundos. Tempo restante: <span id="temporest"></span>
             </div>
-            <div id="score"></div>
+            <div id="score">0</div>
             <div id="inv1" class="invasor"></div>
             <div id="inv2" class="invasor"></div>
             <div id="inv3" class="invasor"></div>
             <div id="inv4" class="invasor"></div>
             <div id="bom1" class="bonzinho"></div>
             <div id="bom2" class="bonzinho"></div>
+            <img src="imagens/splash-1.gif" id="splash">
 
             <img src="imagens/pontos100.png" id="pts100">
         </div>

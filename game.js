@@ -25,14 +25,18 @@ const moveElemento = (el,veloc, inc)=> {
     const anima = setInterval( ()=>{
         veloc = veloc + inc 
         el.style.left = veloc + 'px'
-        //Verifica se saiu do quadro e retorna 
-        if(veloc > larguraQuadro){
+        //Verifica se saiu do quadro OU se possui a classe "morto", sai do quadro e retorna
+        if(veloc > larguraQuadro || el.classList.contains('morto')){
             //redefine a velocidade e incremento
             veloc = -Math.random()*400+80
-            inc = Math.random()*40+10
+            inc = Math.random()*20+5
             posicElemento(el)
+            //remove a classe "Morto" do elemento 
+            el.classList.remove('morto')
 
         }
+        //adiciona atributo "velocidade" aos elementos como valor de incremento
+        el.setAttribute('velocidade', inc)
     },40 )
 
 
@@ -43,7 +47,29 @@ const moveElemento = (el,veloc, inc)=> {
 
 //Função para clicar no elemento - matar o elemento
 const clickBug = (el)=>{
-      alert('Morri !!')
+    let splash =  document.getElementById('splash')
+    //captura posição do inseto ao ser clicado 
+    let left = el.style.left
+    let top = el.style.top
+    //posiciona splash na mesma posição 
+    splash.style.left = left
+    splash.style.top = top
+    //recarrega o gif animado 
+    splash.src = `${splash.src}?a=${Math.random()}`
+
+    let ponto = 10
+    //se velocidade for maior que 20 ponto vale 100 e mostra a imagem "+100"
+    if(el.getAttribute('velocidade') > 20){
+        ponto = 100
+    }
+
+
+      //soma na pontuação geral e remove da tela
+      //adiciona a classe "Morto"
+      score += ponto
+      el.classList.add('morto')
+      document.getElementById('score').innerHTML = score
+
 }
 
 /*
