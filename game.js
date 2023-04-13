@@ -58,9 +58,23 @@ const clickBug = (el)=>{
     splash.src = `${splash.src}?a=${Math.random()}`
 
     let ponto = 10
-    //se velocidade for maior que 20 ponto vale 100 e mostra a imagem "+100"
-    if(el.getAttribute('velocidade') > 20){
+    //se velocidade for maior que 20 ponto vale 100 e mostra a imagem "+100" (somente invasores)
+    if(el.getAttribute('velocidade') > 20 && el.classList.contains('invasor') ){
         ponto = 100
+        //exibe a imagem +100 na posição do inseto 
+        let img100 = document.getElementById('pts100')
+        img100.style.left = left
+        img100.style.top = top
+        //após 1/2 segundo muda o LEFT de img100 para '-5000px'
+        setTimeout(() =>{
+            img100.style.left = '-5000px'
+
+        }, 500)
+        
+    }
+    //se elemento for "Bonzinho" - classe bonzinho pontuação vale -50
+    if(el.classList.contains('bonzinho')){
+        ponto = -50 
     }
 
 
@@ -104,7 +118,7 @@ for (const inv of invasores) {
     let incInicio   = Math.floor(Math.random()*10 + 5)
     posicElemento(inv)
     moveElemento(inv, velocInicio, incInicio)
-    inv.addEventListener('click', ()=>{ clickBug(inv) })
+    inv.addEventListener('mousedown', ()=>{ clickBug(inv) })
     
 }
 
@@ -114,10 +128,30 @@ for (const bom of bonzinhos) {
     let incInicio   = Math.floor(Math.random()*10 + 5)
     posicElemento(bom)
     moveElemento(bom, velocInicio, incInicio)
-    bom.addEventListener('click', ()=>{ clickBug(bom) })
+    bom.addEventListener('mousedown', ()=>{ clickBug(bom) })
     
     
 }
+
+document.getElementById('infoTR').innerText = tempoRestante
+document.getElementById('temporest').innerText = tempoRestante
+
+//executa a cada segundo até atingir o valor da variável tempoRestante SETINTERVAL Após isso GAMEOVER
+let tempo = tempoRestante
+const tempoGame = setInterval( ()=>{
+    //Mostra o tempo nos spans infoTR e teporest
+    document.getElementById('infoTR').innerText = tempoRestante
+    document.getElementById('temporest').innerText = --tempo
+    //se tempo for igual a 0, fim de jogo e recarrega a página 
+    if(tempo == -1){
+        alert('GAMEOVER')
+    
+    //REGARREGA A PÁGINA (F5)
+    location.reload(true)
+}
+},1000)
+
+
 
 
 
